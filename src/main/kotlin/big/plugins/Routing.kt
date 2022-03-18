@@ -15,7 +15,6 @@ fun Application.configureRouting() {
         }
         get("/users") {
             val users = userService.getAllUsers()
-            println("-------->" + users)
             call.respond(users)
         }
 
