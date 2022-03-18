@@ -1,22 +1,23 @@
 package big.plugins
 
 import io.ktor.server.routing.*
-import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.response.*
-import io.ktor.server.request.*
-import my_kotlin_app.service.UserService
+import my_kotlin_app.service.ProfileService
 
 fun Application.configureRouting() {
-    val userService = UserService()
+    val userService = ProfileService()
     routing {
         get("/") {
             call.respondText("Hello World!")
         }
-        get("/users") {
-            val users = userService.getAllUsers()
-            call.respond(users)
-        }
 
+        authenticate {
+            get("/profiles") {
+                val users = userService.getAllUsers()
+                call.respond(users)
+            }
+        }
     }
 }

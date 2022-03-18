@@ -7,19 +7,19 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 
-class UserService {
+class ProfileService {
     suspend fun getAllUsers(): List<ProfileType> = dbQuery {
-        Profile.selectAll().map { toUser(it) }
+        Profile.selectAll().map { toProfileType(it) }
     }
 
     suspend fun getUserByEmail(email: String): ProfileType? = dbQuery {
         Profile.select {
             (Profile.email eq email)
-        }.mapNotNull { toUser(it) }
+        }.mapNotNull { toProfileType(it) }
             .singleOrNull()
     }
 
-    private fun toUser(row: ResultRow): ProfileType =
+    private fun toProfileType(row: ResultRow): ProfileType =
         ProfileType(
             id = row[Profile.id],
             email = row[Profile.email],
