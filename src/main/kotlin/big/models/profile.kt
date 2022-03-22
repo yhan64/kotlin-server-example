@@ -12,6 +12,6 @@ object Profile : Table() {
 
 data class ProfileType(
     val id: Int,
-    val email: String?,
-    val password: String?
+    val email: String,
+    val password: String
 )

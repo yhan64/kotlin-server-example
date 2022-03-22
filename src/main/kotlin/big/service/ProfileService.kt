@@ -12,7 +12,7 @@ class ProfileService {
         Profile.selectAll().map { toProfileType(it) }
     }
 
-    suspend fun getUserByEmail(email: String): ProfileType? = dbQuery {
+    suspend fun getProfileByEmail(email: String): ProfileType? = dbQuery {
         Profile.select {
             (Profile.email eq email)
         }.mapNotNull { toProfileType(it) }
