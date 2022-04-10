@@ -1,6 +1,6 @@
 package big.plugins
 
-import big.utils.createJwtToken
+import big.utils.JWT
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -16,13 +16,18 @@ fun Application.configureRouting() {
         get("/") {
             call.respondText("Hello World!")
         }
+        post("/register") {
+            val creds = call.receive<LoginRegister>()
+            profileService.registerProfile(creds.email, BCrypt.hashpw(creds.password, BCrypt.gensalt()))
+            call.respond("Success!")
+        }
         post("/login") {
             val creds = call.receive<LoginRegister>()
             val profile = profileService.getProfileByEmail(creds.email)
             if (profile == null || !BCrypt.checkpw(creds.password, profile.password)) {
                 error("Invalid Credentials")
             }
-            val token = createJwtToken(profile.email)
+            val token = JWT.createJwtToken(profile.email)
             call.respond(hashMapOf("token" to token))
         }
 

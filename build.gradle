@@ -27,7 +27,7 @@ dependencies {
 
     // connect to Database
     implementation 'org.jetbrains.exposed:exposed-core:0.37.3'
-    implementation 'org.jetbrains.exposed:exposed-dao:0.37.3'
+//    implementation 'org.jetbrains.exposed:exposed-dao:0.37.3'
     implementation 'org.jetbrains.exposed:exposed-jdbc:0.37.3'
     implementation 'com.zaxxer:HikariCP:2.7.8'
     implementation "org.postgresql:postgresql:42.2.2"
