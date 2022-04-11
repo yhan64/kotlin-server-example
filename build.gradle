@@ -25,12 +25,13 @@ dependencies {
     implementation "io.ktor:ktor-server-netty-jvm:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
 
-    // connect to Database
+    // connect to database
     implementation 'org.jetbrains.exposed:exposed-core:0.37.3'
-//    implementation 'org.jetbrains.exposed:exposed-dao:0.37.3'
     implementation 'org.jetbrains.exposed:exposed-jdbc:0.37.3'
-    implementation 'com.zaxxer:HikariCP:2.7.8'
     implementation "org.postgresql:postgresql:42.2.2"
+
+    // database pooling
+    implementation 'com.zaxxer:HikariCP:2.7.8'
 
     // database migration
     implementation "org.flywaydb:flyway-core:6.5.2"
